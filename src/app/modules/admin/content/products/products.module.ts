@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../../shared/shared.module';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -25,6 +25,8 @@ export const ProductsRoutes: Routes = [{
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(ProductsRoutes),
     SharedModule
   ],

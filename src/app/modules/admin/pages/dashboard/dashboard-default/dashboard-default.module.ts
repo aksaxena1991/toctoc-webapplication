@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardDefaultComponent } from './dashboard-default.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../../../shared/shared.module';
-import {ChartModule} from 'angular2-chartjs';
-
 export const DashboardDefaultRoutes: Routes = [
   {
     path: '',
@@ -21,8 +19,7 @@ export const DashboardDefaultRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(DashboardDefaultRoutes),
-    SharedModule,
-    ChartModule
+    SharedModule
   ],
   declarations: [DashboardDefaultComponent]
 })
