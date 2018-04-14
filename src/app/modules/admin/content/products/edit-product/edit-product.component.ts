@@ -24,16 +24,10 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 export class EditProductComponent implements OnInit, OnDestroy {
   myForm: FormGroup;
-
-  mytooltipForm: FormGroup;
-  checkdropForm: FormGroup;
-  submitted: boolean;
-
   public editor;
   public editorContent;
   public editorConfig = {
-    placeholder: 'About Your Self';
-
+    placeholder: 'About Your Self'
   };
   uploader: FileUploader = new FileUploader({
     url: URL,
