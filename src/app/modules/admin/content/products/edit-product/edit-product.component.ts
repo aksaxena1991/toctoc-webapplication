@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {IOption} from 'ng-select';
@@ -9,10 +9,13 @@ import {CustomValidators} from 'ng2-validation';
 import {SelectOptionService} from '../../../../../modules/admin/shared/element/select-option.service';
 
 import {Http, Response} from '@angular/http';
+import {FileUploader} from 'ng2-file-upload';
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: [
     './edit-product.component.css',
     '../../../../../../../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.min.css'
@@ -31,7 +34,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
   public editorConfig = {
     placeholder: "About Your Self"
   };
-
+  uploader: FileUploader = new FileUploader({
+    url: URL,
+    isHTML5: true
+  });
+  hasBaseDropZoneOver = false;
+  hasAnotherDropZoneOver = false;
   simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
   selectedOption = '3';
   isDisabled = true;
@@ -87,17 +95,16 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
     const productName = new FormControl('', Validators.required);
     const productPrice = new FormControl('', Validators.required);
-    const password = new FormControl('', Validators.required);
-    const gender = new FormControl('', Validators.required);
-    const email = new FormControl('', [Validators.required, Validators.email]);
+    const categoryId = new FormControl('', Validators.required);
+    const productImage = new FormControl('', Validators.required);
+    const productDescription = new FormControl('', Validators.required);
 
-    const rpassword = new FormControl('', [Validators.required, CustomValidators.equalTo(password)]);
     this.myForm = new FormGroup({
       productName: productName,
       productPrice: productPrice,
-      password: password,
-      rpassword: rpassword,
-      gender: gender
+      categoryId: categoryId,
+      productDescription: productDescription,
+      productImage: productImage
     });
     /*Basic validation end*/
 
@@ -117,10 +124,8 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
     /*Tooltip Validation Start*/
     const usernameP = new FormControl('', [Validators.required]);
-    const EmailP = new FormControl('', [Validators.required, Validators.email]);
     this.mytooltipForm = new FormGroup({
-      usernameP: usernameP,
-      EmailP: EmailP,
+      usernameP: usernameP
     });
     /*Tooltip Validation End*/
 
@@ -181,5 +186,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
     return this.http
       .get(url)
       .map(data => data.json().items.map(item => item.full_name));
+  }
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
   }
 }

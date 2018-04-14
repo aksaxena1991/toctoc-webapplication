@@ -12,6 +12,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ViewProductComponent } from './view-product/view-product.component';
 import {QuillEditorModule} from 'ngx-quill-editor';
+import {FileUploadModule} from 'ng2-file-upload';
 export const ProductsRoutes: Routes = [{
   path: '',
 
@@ -39,7 +40,8 @@ export const ProductsRoutes: Routes = [{
     DataTableModule,
     RouterModule.forChild(ProductsRoutes),
     SharedModule,
-    QuillEditorModule
+    QuillEditorModule,
+    FileUploadModule
   ],
   providers: [SelectOptionService],
   declarations: [ViewProductComponent, EditProductComponent, AddProductComponent]
