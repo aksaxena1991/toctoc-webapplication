@@ -85,15 +85,16 @@ export class EditProductComponent implements OnInit, OnDestroy {
   ];
   constructor(public selectOptionService: SelectOptionService, public http: Http) {
 
-    const name = new FormControl('', Validators.required);
+    const productName = new FormControl('', Validators.required);
+    const productPrice = new FormControl('', Validators.required);
     const password = new FormControl('', Validators.required);
     const gender = new FormControl('', Validators.required);
     const email = new FormControl('', [Validators.required, Validators.email]);
 
     const rpassword = new FormControl('', [Validators.required, CustomValidators.equalTo(password)]);
     this.myForm = new FormGroup({
-      name: name,
-      email: email,
+      productName: productName,
+      productPrice: productPrice,
       password: password,
       rpassword: rpassword,
       gender: gender
