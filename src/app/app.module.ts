@@ -13,6 +13,7 @@ import {BreadcrumbsComponent} from './modules/admin/breadcrumbs/breadcrumbs.comp
 import {TitleComponent} from './modules/admin/title/title.component';
 import {AuthComponent} from './modules/auth/auth.component';
 import {ProductsComponent} from './modules/admin/content/products/products.component';
+import {RolesComponent} from './modules/admin/content/roles/roles.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ProductsComponent} from './modules/admin/content/products/products.compo
     BreadcrumbsComponent,
     TitleComponent,
     AuthComponent,
-    ProductsComponent
+    ProductsComponent,
+    RolesComponent
   ],
   imports: [
     BrowserModule,

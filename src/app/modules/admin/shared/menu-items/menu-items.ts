@@ -42,40 +42,55 @@ const MENUITEMS = [
         icon: 'ti-home'
       },
       {
-        state: 'basic',
-        short_label: 'B',
-        name: 'Basic Components',
+        state: 'roles',
+        short_label: 'R',
+        name: 'Roles',
         type: 'sub',
-        icon: 'ti-layout-grid2-alt',
+        icon: 'ti-view-grid',
+        // badge: [
+        //   {
+        //     type: 'danger',
+        //     value: '100+'
+        //   }
+        // ],
         children: [
           {
-            state: 'button',
-            name: 'Button'
+            state: 'view',
+            name: 'View Role'
           },
           {
-            state: 'typography',
-            name: 'Typography'
+            state: 'add',
+            name: 'Add Role'
           }
         ]
-      },
-      {
-        state: 'notifications',
-        short_label: 'n',
-        name: 'Notifications',
-        type: 'link',
-        icon: 'ti-crown'
-      },
+      }
     ],
   },
   {
-    label: 'Tables',
+    label: 'Stock Management',
     main: [
       {
-        state: 'bootstrap-table',
-        short_label: 'B',
-        name: 'Bootstrap Table',
-        type: 'link',
-        icon: 'ti-receipt'
+        state: 'products',
+        short_label: 'P',
+        name: 'Products',
+        type: 'sub',
+        icon: 'ti-view-grid',
+        // badge: [
+        //   {
+        //     type: 'danger',
+        //     value: '100+'
+        //   }
+        // ],
+        children: [
+          {
+            state: 'view',
+            name: 'View Product'
+          },
+          {
+            state: 'add',
+            name: 'Add Product'
+          }
+        ]
       }
     ]
   },
@@ -185,19 +200,6 @@ const MENUITEMS = [
         name: 'Simple Page',
         type: 'link',
         icon: 'ti-layout-sidebar-left'
-      }
-    ]
-  }, {
-    label: 'Support',
-    main: [
-      {
-        state: 'Upgrade To Pro',
-        short_label: 'U',
-        external: 'https://codedthemes.com/item/guru-able-admin-template/',
-        name: 'Upgrade To Pro',
-        type: 'external',
-        icon: 'ti-layout-list-post',
-        target: true
       }
     ]
   }

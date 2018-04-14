@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {AdminComponent} from './modules/admin/admin.component';
 import {AuthComponent} from './modules/auth/auth.component';
 import { ProductsComponent} from './modules/admin/content/products/products.component';
+import { RolesComponent} from './modules/admin/content/roles/roles.component';
 
 export const AppRoutes: Routes = [
   {
@@ -37,6 +38,13 @@ export const AppRoutes: Routes = [
     component: ProductsComponent,
     children: [
       {path: 'products', loadChildren: './modules/admin/content/products/products.module#ProductsModule'}
+    ]
+  },
+  {
+    path: '',
+    component: RolesComponent,
+    children: [
+      {path: 'roles', loadChildren: './modules/admin/content/roles/roles.module#RolesModule'}
     ]
   },
   {
