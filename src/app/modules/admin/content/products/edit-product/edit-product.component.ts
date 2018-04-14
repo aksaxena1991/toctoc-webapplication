@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map';
 import {IOption} from 'ng-select';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CustomValidators} from 'ng2-validation';
 import {SelectOptionService} from '../../../../../modules/admin/shared/element/select-option.service';
 
 import {Http, Response} from '@angular/http';
@@ -18,6 +20,18 @@ import {Http, Response} from '@angular/http';
   encapsulation: ViewEncapsulation.None
 })
 export class EditProductComponent implements OnInit, OnDestroy {
+  myForm: FormGroup;
+  mynumberForm: FormGroup;
+  mytooltipForm: FormGroup;
+  checkdropForm: FormGroup;
+  submitted: boolean;
+
+  public editor;
+  public editorContent;
+  public editorConfig = {
+    placeholder: "About Your Self"
+  };
+
   simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
   selectedOption = '3';
   isDisabled = true;
@@ -69,13 +83,83 @@ export class EditProductComponent implements OnInit, OnDestroy {
     {value: 'Samon', id: 33},
     {value: 'John Doe', id:  34}
   ];
-  constructor(public selectOptionService: SelectOptionService, public http: Http) { }
+  constructor(public selectOptionService: SelectOptionService, public http: Http) {
 
+    const name = new FormControl('', Validators.required);
+    const password = new FormControl('', Validators.required);
+    const gender = new FormControl('', Validators.required);
+    const email = new FormControl('', [Validators.required, Validators.email]);
+
+    const rpassword = new FormControl('', [Validators.required, CustomValidators.equalTo(password)]);
+    this.myForm = new FormGroup({
+      name: name,
+      email: email,
+      password: password,
+      rpassword: rpassword,
+      gender: gender
+    });
+    /*Basic validation end*/
+
+    /*number Validation start*/
+    const integer = new FormControl('', [Validators.required, CustomValidators.digits]);
+    const numeric = new FormControl('', [Validators.required, CustomValidators.number]);
+    const greater = new FormControl('', [Validators.required, CustomValidators.gt(50)]);
+    const less = new FormControl('', [Validators.required, CustomValidators.lt(50)]);
+
+    this.mynumberForm = new FormGroup({
+      integer: integer,
+      numeric: numeric,
+      greater: greater,
+      less: less
+    });
+    /*number validation end*/
+
+    /*Tooltip Validation Start*/
+    const usernameP = new FormControl('', [Validators.required]);
+    const EmailP = new FormControl('', [Validators.required, Validators.email]);
+    this.mytooltipForm = new FormGroup({
+      usernameP: usernameP,
+      EmailP: EmailP,
+    });
+    /*Tooltip Validation End*/
+
+    /* component form */
+    const area = new FormControl('', [Validators.required]);
+    const job = new FormControl('', [Validators.required]);
+    this.checkdropForm = new FormGroup({
+      area: area,
+      job: job,
+    });
+    /* end component form */
+  }
   ngOnInit() {
     this.runTimer();
     this.dataSub = this.selectOptionService.loadCharacters().subscribe((options) => {
       this.characters = options;
     });
+
+    setTimeout(() => {
+      this.editorContent = this.editorContent;
+      console.log('you can use the quill instance object to do something', this.editor);
+      // this.editor.disable();
+    }, 2800);
+  }
+
+  onEditorBlured(quill) {
+    console.log('editor blur!', quill);
+  }
+
+  onEditorFocused(quill) {
+    console.log('editor focus!', quill);
+  }
+
+  onEditorCreated(quill) {
+    this.editor = quill;
+    /*console.log('quill is ready! this is current quill instance object', quill);*/
+  }
+
+  onContentChanged({ quill, html, text }) {
+    /*console.log('quill content is changed!', quill, html, text);*/
   }
 
   ngOnDestroy() {

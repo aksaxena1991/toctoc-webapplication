@@ -11,6 +11,7 @@ import {SharedModule} from '../../shared/shared.module';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ViewProductComponent } from './view-product/view-product.component';
+import {QuillEditorModule} from 'ngx-quill-editor';
 export const ProductsRoutes: Routes = [{
   path: '',
 
@@ -37,7 +38,8 @@ export const ProductsRoutes: Routes = [{
     TagInputModule,
     DataTableModule,
     RouterModule.forChild(ProductsRoutes),
-    SharedModule
+    SharedModule,
+    QuillEditorModule
   ],
   providers: [SelectOptionService],
   declarations: [ViewProductComponent, EditProductComponent, AddProductComponent]
