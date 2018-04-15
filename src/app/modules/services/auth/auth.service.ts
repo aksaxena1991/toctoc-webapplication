@@ -7,7 +7,7 @@ export class AuthService {
 
   constructor(private http: Http) { }
   getLogin(creds: any) {
-    return this.http.get(this.baseUrl + 'login', creds).subscribe(res => res.json());
+    return this.http.get(this.baseUrl + 'auth/login', creds).subscribe(res => res.json());
   }
 
 }
