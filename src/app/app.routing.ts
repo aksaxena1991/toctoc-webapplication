@@ -13,7 +13,7 @@ export const AppRoutes: Routes = [
     children: [
        {
         path: 'dashboard',
-        loadChildren: './modules/admin/pages/dashboard/dashboard-default/dashboard-default.module#DashboardDefaultModule'
+        loadChildren: './modules/admin/pages/dashboard/dashboard-default/dashboard.module#DashboardModule'
       }, {
         path: 'basic',
         loadChildren: './modules/admin/pages/ui-elements/basic/basic.module#BasicModule'

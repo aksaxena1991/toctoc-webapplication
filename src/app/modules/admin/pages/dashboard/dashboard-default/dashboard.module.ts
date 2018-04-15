@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardDefaultComponent } from './dashboard-default.component';
+import { DashboardComponent } from './dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../../../shared/shared.module';
-export const DashboardDefaultRoutes: Routes = [
+
+export const DashboardEcommerceRoutes: Routes = [
   {
     path: '',
-    component: DashboardDefaultComponent,
+    component: DashboardComponent,
     data: {
-      breadcrumb: 'Default',
+      breadcrumb: 'Ecommerce',
       icon: 'icofont-home bg-c-blue',
       status: false
     }
@@ -18,9 +19,9 @@ export const DashboardDefaultRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(DashboardDefaultRoutes),
+    RouterModule.forChild(DashboardEcommerceRoutes),
     SharedModule
   ],
-  declarations: [DashboardDefaultComponent]
+  declarations: [DashboardComponent]
 })
-export class DashboardDefaultModule { }
+export class DashboardModule { }

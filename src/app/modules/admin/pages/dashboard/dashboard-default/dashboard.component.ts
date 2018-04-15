@@ -7,19 +7,17 @@ import '../../../../../../assets/charts/amchart/serial.js';
 import '../../../../../../assets/charts/amchart/light.js';
 import '../../../../../../assets/charts/amchart/ammap.js';
 import '../../../../../../assets/charts/amchart/worldLow.js';
+
 declare const $: any;
 declare const AmCharts: any;
 import '../../../../../../../node_modules/peity/jquery.peity.min.js';
 
 @Component({
-  selector: 'app-dashboard-default',
-  templateUrl: './dashboard-default.component.html',
-  styleUrls: [
-    './dashboard-default.component.css'
-  ]
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class DashboardDefaultComponent implements OnInit {
-
+export class DashboardComponent implements OnInit {
   gTargetHTML: string;
   gGap: string;
 
@@ -292,7 +290,9 @@ export class DashboardDefaultComponent implements OnInit {
       'linesAboveImages': true
     });
   }
+
 }
+
 function getRandomData() {
   let data = [];
   const totalPoints = 300;
