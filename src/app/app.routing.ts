@@ -5,7 +5,7 @@ import { ProductsComponent} from './modules/admin/content/products/products.comp
 import { RolesComponent} from './modules/admin/content/roles/roles.component';
 import { CategoriesComponent} from './modules/admin/content/categories/categories.component';
 import { CouponsComponent} from './modules/admin/content/coupons/coupons.component';
-
+// import { AuthGuard } from './modules/guards/auth.guard';
 export const AppRoutes: Routes = [
   {
     path: '',
@@ -15,23 +15,11 @@ export const AppRoutes: Routes = [
         path: 'dashboard',
         loadChildren: './modules/admin/pages/dashboard/dashboard-default/dashboard.module#DashboardModule'
       }, {
-        path: 'basic',
-        loadChildren: './modules/admin/pages/ui-elements/basic/basic.module#BasicModule'
-      }, {
         path: 'notifications',
         loadChildren: './modules/admin/pages/ui-elements/advance/notifications/notifications.module#NotificationsModule'
       }, {
-        path: 'bootstrap-table',
-        loadChildren: './modules/admin/pages/ui-elements/tables/basic-bootstrap.module#BasicBootstrapModule',
-      }, {
-        path: 'map',
-        loadChildren: './modules/admin/pages/map/google-map/google-map.module#GoogleMapModule',
-      }, {
         path: 'user',
         loadChildren: './modules/admin/pages/user/profile/profile.module#ProfileModule'
-      }, {
-        path: 'simple-page',
-        loadChildren: './modules/admin/pages/simple-page/simple-page.module#SimplePageModule'
       }
     ]
   },

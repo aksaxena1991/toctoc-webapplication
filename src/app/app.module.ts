@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import {AppRoutes} from './app.routing';
-
+import { AuthGuard } from './modules/guards/auth.guard';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import {ClickOutsideModule} from 'ng-click-outside';
@@ -37,7 +37,9 @@ import {CouponsComponent} from './modules/admin/content/coupons/coupons.componen
     ClickOutsideModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

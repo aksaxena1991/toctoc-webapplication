@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('token', JSON.parse(success['_body']).token);
         this._router.navigate(['/dashboard']);
       }
+      return false;
     });
-    // this._authService.getLogin(creds);
   }
 
 }
