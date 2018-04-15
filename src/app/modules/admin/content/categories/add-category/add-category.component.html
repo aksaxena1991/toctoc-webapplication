@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <app-card [title]="'Add New Category Details'" [headerContent]="''">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Category Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="categoryName" placeholder="Category Name" formControlName="categoryName">
+            <div class="messages text-danger" *ngIf="myForm.controls.categoryName.errors?.required">Category Name can't be blank</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Parent Category Name</label>
+          <div class="col-sm-10">
+            <ng-select [ngClass]="'ng-select'" formControlName="parentCategoryId" [options]="simpleOption" [(ngModel)]="selectedOption"> </ng-select>
+            <div class="messages text-danger" *ngIf="myForm.controls.parentCategoryId.errors?.required">Parent Category Name can't be blank</div>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Category Image</label>
+          <div class="col-sm-3">
+            <input type="file" ng2FileSelect [uploader]="uploader" formControlName="categoryImage" class="custom-file-input">
+            <div class="messages text-danger" *ngIf="myForm.controls.categoryImage.errors?.required">Category Image can't be blank</div>
+
+          </div>
+          <div class="col-sm-7">
+            <div class="sub-title">Upload Queue</div>
+            <p>Queue length: {{ uploader?.queue?.length }}</p>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="50%">Name</th>
+                  <th>Size</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                  <td><strong>{{ item?.file?.name }}</strong></td>
+                  <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                  <td *ngIf="uploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                    <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                    <span *ngIf="item.isError"><i class="fa fa-times"></i></span>
+                  </td>
+                  <td nowrap>
+                    <button type="button" class="btn btn-success btn-sm" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                      <span class="fa fa-upload"></span> Upload
+                    </button>
+                    <button type="button" class="btn btn-warning btn-sm" (click)="item.cancel()" [disabled]="!item.isUploading">
+                      <span class="fa fa-ban"></span> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="item.remove()">
+                      <span class="fa fa-trash"></span> Remove
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5" class="text-center">
+                    <span>Your Uploaded Files</span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <div class="sub-title">Queue progress</div>
+              <p><ngb-progressbar type="primary" [value]="uploader.progress"></ngb-progressbar></p>
+
+              <div class="sub-title">Common Action</div>
+              <button type="button" class="btn btn-success" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                <span class="fa fa-upload"></span> Upload all
+              </button>
+              <button type="button" class="btn btn-warning" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                <span class="fa fa-ban"></span> Cancel all
+              </button>
+              <button type="button" class="btn btn-danger" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                <span class="fa fa-trash"></span> Remove all
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Category Description:</label>
+          <div class="col-sm-10">
+            <quill-editor
+              [(ngModel)]="editorContent"
+              [options]="editorConfig"
+              formControlName="categoryDescription"
+              (blur)="onEditorBlured($event)"
+              (focus)="onEditorFocused($event)"
+              (ready)="onEditorCreated($event)"
+              (change)="onContentChanged($event)">
+            </quill-editor>
+            <div class="messages text-danger" *ngIf="myForm.controls.categoryDescription.errors?.required">Category Description can't be blank</div>
+          </div>
+        </div>
+        <div class="form-group row" style="margin: 60px 0px;">
+          <label class="col-sm-2"></label>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary m-b-0" [disabled]="!myForm.valid">Submit</button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+
+  </div>
+</div>
+
+
