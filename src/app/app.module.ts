@@ -14,6 +14,7 @@ import {TitleComponent} from './modules/admin/title/title.component';
 import {AuthComponent} from './modules/auth/auth.component';
 import {ProductsComponent} from './modules/admin/content/products/products.component';
 import {RolesComponent} from './modules/admin/content/roles/roles.component';
+import {CategoriesComponent} from './modules/admin/content/categories/categories.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {RolesComponent} from './modules/admin/content/roles/roles.component';
     TitleComponent,
     AuthComponent,
     ProductsComponent,
-    RolesComponent
+    RolesComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import {AdminComponent} from './modules/admin/admin.component';
 import {AuthComponent} from './modules/auth/auth.component';
 import { ProductsComponent} from './modules/admin/content/products/products.component';
 import { RolesComponent} from './modules/admin/content/roles/roles.component';
+import { CategoriesComponent} from './modules/admin/content/categories/categories.component';
 
 export const AppRoutes: Routes = [
   {
@@ -31,6 +32,13 @@ export const AppRoutes: Routes = [
         path: 'simple-page',
         loadChildren: './modules/admin/pages/simple-page/simple-page.module#SimplePageModule'
       }
+    ]
+  },
+  {
+    path: '',
+    component: CategoriesComponent,
+    children: [
+      {path: 'categories', loadChildren: './modules/admin/content/categories/categories.module#CategoriesModule'}
     ]
   },
   {
