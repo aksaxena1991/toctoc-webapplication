@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <app-card [title]="'Add New Coupon Details'" [headerContent]="''">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Coupon Code:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="couponCode" placeholder="Coupon Code" formControlName="couponCode">
+            <div class="messages text-danger" *ngIf="myForm.controls.couponCode.errors?.required">Coupon Code can't be blank</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Coupon Type:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="couponType"  placeholder="Coupon Type" formControlName="couponType">
+            <div class="messages text-danger error" *ngIf="myForm.controls.couponType.errors?.required">Coupon Type can't be blank</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Coupon Value:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="couponValue"  placeholder="Coupon Value" formControlName="couponValue">
+            <div class="messages text-danger error" *ngIf="myForm.controls.couponValue.errors?.required">Coupon Value can't be blank</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Coupon Valid From:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="couponValidFrom"  placeholder="Coupon Valid From" formControlName="couponValidFrom">
+            <div class="messages text-danger error" *ngIf="myForm.controls.couponValidFrom.errors?.required">Coupon Valid From can't be blank</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Coupon Valid To:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="couponValidTo"  placeholder="Coupon Valid To" formControlName="couponValidTo">
+            <div class="messages text-danger error" *ngIf="myForm.controls.couponValidTo.errors?.required">Coupon Valid To can't be blank</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Coupon Usage:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="couponUsage"  placeholder="Coupon Usage" formControlName="couponUsage">
+            <div class="messages text-danger error" *ngIf="myForm.controls.couponUsage.errors?.required">Coupon Usage can't be blank</div>
+          </div>
+        </div>
+
+        <div class="form-group row" style="margin: 60px 0px;">
+          <label class="col-sm-2"></label>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary m-b-0" [disabled]="!myForm.valid">Submit</button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+
+  </div>
+</div>
+
+

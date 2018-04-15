@@ -4,6 +4,7 @@ import {AuthComponent} from './modules/auth/auth.component';
 import { ProductsComponent} from './modules/admin/content/products/products.component';
 import { RolesComponent} from './modules/admin/content/roles/roles.component';
 import { CategoriesComponent} from './modules/admin/content/categories/categories.component';
+import { CouponsComponent} from './modules/admin/content/coupons/coupons.component';
 
 export const AppRoutes: Routes = [
   {
@@ -39,6 +40,13 @@ export const AppRoutes: Routes = [
     component: CategoriesComponent,
     children: [
       {path: 'categories', loadChildren: './modules/admin/content/categories/categories.module#CategoriesModule'}
+    ]
+  },
+  {
+    path: '',
+    component: CouponsComponent,
+    children: [
+      {path: 'coupons', loadChildren: './modules/admin/content/coupons/coupons.module#CouponsModule'}
     ]
   },
   {

@@ -63,12 +63,58 @@ const MENUITEMS = [
             name: 'Add Role'
           }
         ]
+      },
+      {
+        state: 'coupons',
+        short_label: 'R',
+        name: 'Coupons',
+        type: 'sub',
+        icon: 'ti-view-grid',
+        // badge: [
+        //   {
+        //     type: 'danger',
+        //     value: '100+'
+        //   }
+        // ],
+        children: [
+          {
+            state: 'view',
+            name: 'View Coupon'
+          },
+          {
+            state: 'add',
+            name: 'Add Coupon'
+          }
+        ]
       }
     ],
   },
   {
     label: 'Stock Management',
     main: [
+      {
+        state: 'categories',
+        short_label: 'P',
+        name: 'Categories',
+        type: 'sub',
+        icon: 'ti-view-grid',
+        // badge: [
+        //   {
+        //     type: 'danger',
+        //     value: '100+'
+        //   }
+        // ],
+        children: [
+          {
+            state: 'view',
+            name: 'View Category'
+          },
+          {
+            state: 'add',
+            name: 'Add Category'
+          }
+        ]
+      },
       {
         state: 'products',
         short_label: 'P',

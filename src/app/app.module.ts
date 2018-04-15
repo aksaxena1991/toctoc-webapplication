@@ -15,6 +15,7 @@ import {AuthComponent} from './modules/auth/auth.component';
 import {ProductsComponent} from './modules/admin/content/products/products.component';
 import {RolesComponent} from './modules/admin/content/roles/roles.component';
 import {CategoriesComponent} from './modules/admin/content/categories/categories.component';
+import {CouponsComponent} from './modules/admin/content/coupons/coupons.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {CategoriesComponent} from './modules/admin/content/categories/categories
     AuthComponent,
     ProductsComponent,
     RolesComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CouponsComponent
   ],
   imports: [
     BrowserModule,
