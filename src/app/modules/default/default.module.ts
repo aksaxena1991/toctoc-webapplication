@@ -8,6 +8,7 @@ import { IndexComponent } from './index/index.component';
     IndexComponent
   ],
   imports: [
+    CommonModule,
     RouterModule.forChild(defaultRoutes),
   ],
   providers: [

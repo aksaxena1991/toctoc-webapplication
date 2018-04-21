@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
-
 import {AppRoutes} from './app.routing';
 import { AuthGuard } from './modules/guards/auth.guard';
 import { AppComponent } from './app.component';

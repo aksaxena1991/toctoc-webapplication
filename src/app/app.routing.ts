@@ -24,11 +24,11 @@ export const AppRoutes: Routes = [
       }
     ]
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'default/index',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: '**',
+    redirectTo: 'default',
+    pathMatch: 'full'
+  },
   {path: '', component: DefaultComponent, children: [
     {path: 'default', loadChildren: './modules/default/default.module#DefaultModule'}
   ]},
