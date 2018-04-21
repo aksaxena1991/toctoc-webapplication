@@ -22,13 +22,13 @@ export class LoginComponent implements OnInit {
   }
   loginWithEmailAndPassword() {
     let creds: any  =  {reg_username: this.loginForm.value.reg_username, reg_password: this.loginForm.value.reg_password};
+    this._router.navigate(['/dashboard']);
     this._authService.getLogin(creds).subscribe(success => {
       if(success.status === 200)
       {
         sessionStorage.setItem('token', JSON.parse(success['_body']).token);
-        this._router.navigate(['/dashboard']);
       }
-      return false;
+      // return false;
     });
   }
 

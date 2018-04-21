@@ -13,7 +13,8 @@ import { EditRoleComponent } from './edit-role/edit-role.component';
 import { ViewRoleComponent } from './view-role/view-role.component';
 import {QuillEditorModule} from 'ngx-quill-editor';
 import {FileUploadModule} from 'ng2-file-upload';
-export const ProductsRoutes: Routes = [{
+import { RolesService} from '../../../services/roles/roles.services';
+export const RolesRoutes: Routes = [{
   path: '',
 
   children: [
@@ -38,12 +39,12 @@ export const ProductsRoutes: Routes = [{
     SelectModule,
     TagInputModule,
     DataTableModule,
-    RouterModule.forChild(ProductsRoutes),
+    RouterModule.forChild(RolesRoutes),
     SharedModule,
     QuillEditorModule,
     FileUploadModule
   ],
-  providers: [SelectOptionService],
+  providers: [SelectOptionService, RolesService],
   declarations: [AddRoleComponent, EditRoleComponent, ViewRoleComponent]
 })
 export class RolesModule { }

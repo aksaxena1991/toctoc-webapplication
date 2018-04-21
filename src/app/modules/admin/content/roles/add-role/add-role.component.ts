@@ -1,17 +1,8 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation} from '@angular/core';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
-import {IOption} from 'ng-select';
-import {Subscription} from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from 'ng2-validation';
-import {SelectOptionService} from '../../../../../modules/admin/shared/element/select-option.service';
-
-import {Http, Response} from '@angular/http';
-import {FileUploader} from 'ng2-file-upload';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
-
+import { RolesService } from '../../../../services/roles/roles.services';
 @Component({
   selector: 'app-add-role',
   templateUrl: './add-role.component.html',
@@ -22,90 +13,21 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class AddRoleComponent implements OnInit, OnDestroy {
+export class AddRoleComponent implements OnInit {
   myForm: FormGroup;
-  public editor;
-  public editorContent;
-  public editorConfig = {
-    placeholder: 'About Your Self'
-  };
-  uploader: FileUploader = new FileUploader({
-    url: URL,
-    isHTML5: true
-  });
-  simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
-  selectedOption = '3';
+  constructor(private _roleService: RolesService) {
 
-  characters: Array<IOption>;
-
-  selectedCharacter = '3';
-  timeLeft = 5;
-
-  countries: Array<IOption> = this.selectOptionService.getCountries();
-  selectedCountry = 'IN';
-  selectedCountries: Array<string> = ['IN', 'BE', 'LU', 'NL'];
-
-  private dataSub: Subscription = null;
-
-  autocompleteItems = ['Alabama', 'Wyoming', 'Henry Die', 'John Doe'];
-  constructor(public selectOptionService: SelectOptionService, public http: Http) {
-
-    const roleName = new FormControl('', Validators.required);
-    const rolePrice = new FormControl('', Validators.required);
-    const categoryId = new FormControl('', Validators.required);
-    const roleImage = new FormControl('', Validators.required);
-    const roleDescription = new FormControl('', Validators.required);
-
+    const role_name = new FormControl('', Validators.required);
     this.myForm = new FormGroup({
-      roleName: roleName,
-      rolePrice: rolePrice,
-      categoryId: categoryId,
-      roleDescription: roleDescription,
-      roleImage: roleImage
+      role_name: role_name
     });
     /*Basic validation end*/
   }
+  onSubmit() {
+    const response = this._roleService.addRole(this.myForm['_value']);
+    console.log(response);
+  }
   ngOnInit() {
-    this.runTimer();
-    this.dataSub = this.selectOptionService.loadCharacters().subscribe((options) => {
-      this.characters = options;
-    });
-
-    setTimeout(() => {
-      this.editorContent = this.editorContent;
-      console.log('you can use the quill instance object to do something', this.editor);
-      // this.editor.disable();
-    }, 2800);
-  }
-
-  onEditorBlured(quill) {
-    console.log('editor blur!', quill);
-  }
-
-  onEditorFocused(quill) {
-    console.log('editor focus!', quill);
-  }
-
-  onEditorCreated(quill) {
-    this.editor = quill;
-    /*console.log('quill is ready! this is current quill instance object', quill);*/
-  }
-
-  onContentChanged({ quill, html, text }) {
-    /*console.log('quill content is changed!', quill, html, text);*/
-  }
-
-  ngOnDestroy() {
-    if (this.dataSub !== null) { this.dataSub.unsubscribe(); }
-  }
-
-  runTimer() {
-    const timer = setInterval(() => {
-      this.timeLeft -= 1;
-      if (this.timeLeft === 0) {
-        clearInterval(timer);
-      }
-    }, 1000);
   }
 
 }
