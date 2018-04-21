@@ -5,7 +5,8 @@ import { ProductsComponent} from './modules/admin/content/products/products.comp
 import { RolesComponent} from './modules/admin/content/roles/roles.component';
 import { CategoriesComponent} from './modules/admin/content/categories/categories.component';
 import { CouponsComponent} from './modules/admin/content/coupons/coupons.component';
-// import { AuthGuard } from './modules/guards/auth.guard';
+// import { AuthGuard } from './modules/default/default.module';
+import { DefaultComponent } from './modules/default/default.component';
 export const AppRoutes: Routes = [
   {
     path: '',
@@ -23,6 +24,14 @@ export const AppRoutes: Routes = [
       }
     ]
   },
+  // {
+  //   path: '',
+  //   redirectTo: 'default/index',
+  //   pathMatch: 'full'
+  // },
+  {path: '', component: DefaultComponent, children: [
+    {path: 'default', loadChildren: './modules/default/default.module#DefaultModule'}
+  ]},
   {
     path: '',
     component: CategoriesComponent,
@@ -55,11 +64,6 @@ export const AppRoutes: Routes = [
     path: '',
     component: AuthComponent,
     children: [
-      {
-        path: '',
-        redirectTo: 'auth',
-        pathMatch: 'full'
-      },
       {
         path: 'auth',
         loadChildren: './modules/auth/auth.module#AuthModule'
