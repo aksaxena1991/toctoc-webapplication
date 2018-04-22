@@ -15,7 +15,6 @@ import {ProductsComponent} from './modules/admin/content/products/products.compo
 import {RolesComponent} from './modules/admin/content/roles/roles.component';
 import {CategoriesComponent} from './modules/admin/content/categories/categories.component';
 import {CouponsComponent} from './modules/admin/content/coupons/coupons.component';
-import {DefaultComponent} from './modules/default/default.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +26,7 @@ import {DefaultComponent} from './modules/default/default.component';
     ProductsComponent,
     RolesComponent,
     CategoriesComponent,
-    CouponsComponent,
-    DefaultComponent
+    CouponsComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,6 @@ export class RolesService {
     return this.http.get(this.baseUrl + 'roles/allRoles');
   }
   addRole(obj: any) {
-    // this.http.post(this.baseUrl + 'roles/addRole', {role_name: obj.role_name}).subscribe();
+    this.http.post(this.baseUrl + 'roles/addRole', {role_name: obj.role_name});
   }
 }

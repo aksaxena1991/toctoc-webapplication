@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DataTableModule} from 'angular2-datatable';
-import {HttpModule} from '@angular/http';
 import {SelectModule} from 'ng-select';
 import {SelectOptionService} from '../../../admin/shared/element/select-option.service';
 import {TagInputModule} from 'ngx-chips';
@@ -35,7 +34,6 @@ export const RolesRoutes: Routes = [{
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     SelectModule,
     TagInputModule,
     DataTableModule,
