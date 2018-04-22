@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {baseUrl} from '../../expoters/url';
+import {url} from '../../expoters/url';
 @Injectable()
 export class RolesService {
 
-  private baseUrl = baseUrl;
+  private baseUrl = url;
 
   constructor(private http: Http) { }
   getAllRoles() {

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12">
-    <app-card [title]="'Angular Datatable'">
-      <span class="m-b-20">use class <code>table table-striped table-bordered full-data-table</code> with table element</span><br><br>
+    <app-card [title]="'View All Categories'">
+      <!--<span class="m-b-20">use class <code>table table-striped table-bordered full-data-table</code> with table element</span><br><br>-->
       <div class="dt-responsive">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
@@ -32,45 +32,32 @@
             <thead>
             <tr>
               <th>
-                <mfDefaultSorter  by="name">Name</mfDefaultSorter>
+                <mfDefaultSorter  by="sno">SNO</mfDefaultSorter>
               </th>
               <th>
-                <mfDefaultSorter  by="position">Position</mfDefaultSorter>
+                <mfDefaultSorter  by="name">Category Name</mfDefaultSorter>
               </th>
               <th>
-                <mfDefaultSorter by="office">Office</mfDefaultSorter>
+                <mfDefaultSorter  by="description">Category Description</mfDefaultSorter>
               </th>
-              <th>
-                <mfDefaultSorter  by="age">Age</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter by="start-date">Start date</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter by="salary">Salary</mfDefaultSorter>
-              </th>
+
             </tr>
             <tr>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of mf.data">
-              <td>{{item.name}}</td>
-              <td>{{item.position}}</td>
-              <td>{{item.office}}</td>
-              <td>{{item.age}}</td>
-              <td>{{item.date}}</td>
-              <td>{{item.salary}}</td>
+            <tr *ngFor="let item of mf.data; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{item.category_name}}</td>
+              <td>{{item.category_description}}</td>
+
             </tr>
             </tbody>
             <tfoot>
             <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
+              <th>SNO</th>
+              <th>Category Name</th>
+              <th>Category Description</th>
             </tr>
             <tr>
               <td colspan="6">
