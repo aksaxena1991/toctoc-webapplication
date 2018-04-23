@@ -1,4 +1,5 @@
 import {Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -15,7 +16,8 @@ import { RolesService } from '../../../../services/roles/roles.services';
 })
 export class AddRoleComponent implements OnInit {
   myForm: FormGroup;
-  constructor(private _roleService: RolesService) {
+
+  constructor(private _roleService: RolesService, private http: Http) {
 
     const role_name = new FormControl('', Validators.required);
     this.myForm = new FormGroup({
@@ -24,8 +26,15 @@ export class AddRoleComponent implements OnInit {
     /*Basic validation end*/
   }
   onSubmit() {
-    const response = this._roleService.addRole(this.myForm['_value']);
-    console.log(response);
+    const headers = new Headers();
+    headers.append( 'Content-Type', 'application/json' );
+    // headers.append('Content-Type', 'application/x-www-form-urlencoded' );
+    const options = new RequestOptions({ headers: headers });
+
+    this.http.post('http://localhost:3000/api/roles/addRole',
+      this.myForm['_value'], options).subscribe((data) => {
+      console.log(data);
+    });
   }
   ngOnInit() {
   }
