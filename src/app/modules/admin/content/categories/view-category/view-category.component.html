@@ -73,7 +73,8 @@
               <td>{{item.category_description}}</td>
 
               <td>
-                <button (click)="remove(i+1)" class="btn btn-danger"><i class="ti-trash"></i></button>
+                <button (click)="remove(item.category_id)" class="btn btn-danger"><i class="ti-trash"></i></button>
+                <a routerLink="/categories/edit/{{item.category_id}}" class="btn btn-success"><i class="ti-eye"></i></a>
               </td>
             </tr>
             </tbody>

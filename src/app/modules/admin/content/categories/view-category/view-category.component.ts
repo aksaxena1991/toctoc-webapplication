@@ -1,12 +1,12 @@
-import { Component, OnInit, DoCheck} from '@angular/core';
-import {Http} from '@angular/http';
+import { Component, OnInit} from '@angular/core';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {url} from '../../../../expoters/url';
 @Component({
   selector: 'app-view-category',
   templateUrl: './view-category.component.html',
   styleUrls: ['./view-category.component.css']
 })
-export class ViewCategoryComponent implements OnInit, DoCheck {
+export class ViewCategoryComponent implements OnInit {
   baseUrl = url;
   public data: any;
   public rowsOnPage = 10;
@@ -20,17 +20,21 @@ export class ViewCategoryComponent implements OnInit, DoCheck {
 
   ngOnInit() {
   }
-  ngDoCheck() {
-    this.allCategories();
-  }
+
   allCategories() {
     this.http.get(this.baseUrl + 'categories/allCategories').subscribe(categories => {
       this.data = JSON.parse(categories['_body']).data;
     });
   }
   remove(id: number) {
-    this.http.delete(this.baseUrl + 'categories/deleteCategory?category_id=' + id).subscribe(data => {
-      console.log(data);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({headers: headers});
+
+    this.http.delete(this.baseUrl + 'categories/deleteCategory?category_id=' + id, options).subscribe(data => {
+      if(data.status === 200) {
+        this.allCategories();
+      }
     });
   }
   public toInt(num: string) {

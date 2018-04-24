@@ -22,7 +22,7 @@ const CategoryRoutes: Routes = [{
       path: 'view', component: ViewCategoryComponent
     },
     {
-      path: 'edit', component: EditCategoryComponent
+      path: 'edit/:id', component: EditCategoryComponent
     },
     {
       path: 'add', component: AddCategoryComponent
