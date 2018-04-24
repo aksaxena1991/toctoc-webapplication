@@ -1,28 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
-import { RolesService } from '../../../../services/roles/roles.services';
+import {url} from '../../../../expoters/url';
 @Component({
   selector: 'app-view-role',
   templateUrl: './view-role.component.html',
   styleUrls: ['./view-role.component.css']
 })
 export class ViewRoleComponent implements OnInit {
-
-  public data: any;
-  public rowsOnPage = 10;
+  baseUrl = url;
+  public data;
   public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
+  public rowsOnPage = 10;
+  public sortBy = 'email';
+  public sortOrder = 'asc';
 
-  constructor(public http: Http, public _roles: RolesService) {
+  constructor(public http: Http) {
     this.allRoles();
   }
   allRoles() {
-    this._roles.getAllRoles().subscribe( roles => {
+    this.http.get(this.baseUrl + 'roles/allRoles').subscribe( roles => {
       this.data = JSON.parse(roles['_body']).data;
     });
   }
   ngOnInit() {
   }
+  public toInt(num: string) {
+    return +num;
+  }
 
+  public sortByWordLength = (a: any) => {
+    console.log(a);
+    // return a.city.length;
+  }
 }

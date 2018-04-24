@@ -13,7 +13,6 @@ import { ViewRoleComponent } from './view-role/view-role.component';
 import {QuillEditorModule} from 'ngx-quill-editor';
 import {FileUploadModule} from 'ng2-file-upload';
 import {HttpModule} from '@angular/http';
-import { RolesService} from '../../../services/roles/roles.services';
 export const RolesRoutes: Routes = [{
   path: '',
 
@@ -44,7 +43,7 @@ export const RolesRoutes: Routes = [{
     QuillEditorModule,
     FileUploadModule
   ],
-  providers: [SelectOptionService, RolesService],
+  providers: [SelectOptionService],
   declarations: [AddRoleComponent, EditRoleComponent, ViewRoleComponent]
 })
 export class RolesModule { }

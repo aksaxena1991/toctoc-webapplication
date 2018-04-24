@@ -4,7 +4,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {url} from '../../../../expoters/url';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RolesService} from '../../../../services/roles/roles.services';
 
 @Component({
   selector: 'app-add-role',
@@ -20,7 +19,7 @@ export class AddRoleComponent implements OnInit {
   myForm: FormGroup;
   baseUrl = url;
 
-  constructor(private _roleService: RolesService, private http: Http) {
+  constructor( private http: Http) {
     const role_name = new FormControl('', Validators.required);
     this.myForm = new FormGroup({
       role_name: role_name

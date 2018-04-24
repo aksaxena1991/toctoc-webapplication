@@ -3,7 +3,6 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { AuthService } from '../services/auth/auth.service';
 import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 
@@ -37,7 +36,6 @@ export const AuthRoutes: Routes = [
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
   declarations: [LoginComponent, RegistrationComponent]
 })
 export class AuthModule { }

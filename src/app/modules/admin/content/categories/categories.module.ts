@@ -13,7 +13,7 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { ViewCategoryComponent } from './view-category/view-category.component';
 import {QuillEditorModule} from 'ngx-quill-editor';
 import {FileUploadModule} from 'ng2-file-upload';
-import {CategoriesService} from '../../../services/categories/categories.services';
+import {DataFilterPipe} from '../../../pipes/data-filter.pipe';
 const CategoryRoutes: Routes = [{
   path: '',
 
@@ -44,7 +44,7 @@ const CategoryRoutes: Routes = [{
     QuillEditorModule,
     FileUploadModule
   ],
-  providers: [SelectOptionService, CategoriesService],
-  declarations: [ViewCategoryComponent, EditCategoryComponent, AddCategoryComponent]
+  providers: [SelectOptionService],
+  declarations: [ViewCategoryComponent, EditCategoryComponent, AddCategoryComponent, DataFilterPipe]
 })
 export class CategoriesModule { }

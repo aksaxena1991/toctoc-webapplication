@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Http} from '@angular/http';
 import {Router} from '@angular/router';
+import {url} from '../../expoters/url';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +10,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(public _authService: AuthService, public _router: Router) {
+  baseUrl = url;
+  constructor(public http: Http, public _router: Router) {
     const reg_username = new FormControl('', Validators.required);
     const reg_password = new FormControl('', Validators.required);
     this.loginForm = new FormGroup({
@@ -18,18 +20,17 @@ export class LoginComponent implements OnInit {
     });
   }
   ngOnInit() {
-    console.log();
   }
   loginWithEmailAndPassword() {
-    let creds: any  =  {reg_username: this.loginForm.value.reg_username, reg_password: this.loginForm.value.reg_password};
-    this._router.navigate(['/dashboard']);
-    this._authService.getLogin(creds).subscribe(success => {
-      if(success.status === 200)
-      {
-        sessionStorage.setItem('token', JSON.parse(success['_body']).token);
+    const creds  =  {reg_username: this.loginForm.value.reg_username, reg_password: this.loginForm.value.reg_password};
+    this.http.get(this.baseUrl + 'auth/login', creds).subscribe( data => {
+      if (data.status === 200) {
+        sessionStorage.setItem('token', JSON.parse(data['_body']).token);
+        this._router.navigate(['/dashboard']);
+      } else {
+        this._router.navigate(['/auth/login']);
       }
-      // return false;
     });
-  }
+}
 
 }
