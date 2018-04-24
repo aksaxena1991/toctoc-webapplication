@@ -2,16 +2,13 @@ import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ViewEncapsulation
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {IOption} from 'ng-select';
-import {Subscription} from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
+import {url} from '../../../../expoters/url';
+import {Ng2FileInputService, Ng2FileInputAction} from 'ng2-file-input';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from 'ng2-validation';
+
 import {SelectOptionService} from '../../../../../modules/admin/shared/element/select-option.service';
 
-import {Http, Response} from '@angular/http';
-import {FileUploader} from 'ng2-file-upload';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
-
+import {Http, Headers, RequestOptions} from '@angular/http';
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -23,51 +20,32 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   encapsulation: ViewEncapsulation.None
 })
 export class AddCategoryComponent implements OnInit, OnDestroy {
+  baseURL = url;
   myForm: FormGroup;
   public editor;
   public editorContent;
   public editorConfig = {
     placeholder: 'About Your Self'
   };
-  uploader: FileUploader = new FileUploader({
-    url: URL,
-    isHTML5: true
-  });
+  public events;
   simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
   selectedOption = '3';
+  constructor(private ng2FileInputService: Ng2FileInputService, public selectOptionService: SelectOptionService, public http: Http) {
 
-  characters: Array<IOption>;
-
-  selectedCharacter = '3';
-  timeLeft = 5;
-
-  countries: Array<IOption> = this.selectOptionService.getCountries();
-  selectedCountry = 'IN';
-  selectedCountries: Array<string> = ['IN', 'BE', 'LU', 'NL'];
-
-  private dataSub: Subscription = null;
-
-  autocompleteItems = ['Alabama', 'Wyoming', 'Henry Die', 'John Doe'];
-  constructor(public selectOptionService: SelectOptionService, public http: Http) {
-
-    const categoryName = new FormControl('', Validators.required);
-    const parentCategoryId = new FormControl('', Validators.required);
-    const categoryImage = new FormControl('', Validators.required);
-    const categoryDescription = new FormControl('', Validators.required);
-
+    const category_name = new FormControl('', Validators.required);
+    const parent_category_id = new FormControl('', Validators.required);
+    const category_description = new FormControl('', Validators.required);
+    const store_id = new FormControl('', Validators.required);
     this.myForm = new FormGroup({
-      categoryName: categoryName,
-      parentCategoryId: parentCategoryId,
-      categoryDescription: categoryDescription,
-      categoryImage: categoryImage
+      category_name: category_name,
+      parent_category_id: parent_category_id,
+      category_description: category_description,
+      store_id: store_id
     });
     /*Basic validation end*/
   }
+
   ngOnInit() {
-    this.runTimer();
-    this.dataSub = this.selectOptionService.loadCharacters().subscribe((options) => {
-      this.characters = options;
-    });
 
     setTimeout(() => {
       this.editorContent = this.editorContent;
@@ -89,21 +67,50 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     /*console.log('quill is ready! this is current quill instance object', quill);*/
   }
 
-  onContentChanged({ quill, html, text }) {
+  onContentChanged({quill, html, text}) {
     /*console.log('quill content is changed!', quill, html, text);*/
   }
 
   ngOnDestroy() {
-    if (this.dataSub !== null) { this.dataSub.unsubscribe(); }
+
   }
 
-  runTimer() {
-    const timer = setInterval(() => {
-      this.timeLeft -= 1;
-      if (this.timeLeft === 0) {
-        clearInterval(timer);
-      }
-    }, 1000);
+  public onAction(event: any) {
+
+    this.events = event;
+  }
+
+  public onAdded(event: any) {
+    console.log(event.id);
+  }
+
+  public onRemoved(event: any) {
+    console.log(event.id);
+  }
+
+  public onSubmit() {
+    console.log(this.events);
+    const formData = new FormData();
+    console.log(this.myForm['_value']);
+    formData.append('category_image', this.events.file);
+    formData.append('category_name', this.myForm['_value'].category_name);
+    formData.append('parent_category_id', this.myForm['_value'].parent_category_id);
+    formData.append('category_description', this.myForm['_value'].category_description);
+    formData.append('store_id', this.myForm['_value'].store_id);
+    // this.myForm['_value'].category_image = this.events.file;
+    // console.log(this.events.currentFiles[0]);
+    // console.log(this.myForm['_value']);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({headers: headers});
+    this.http.post(this.baseURL + 'categories/addCategory', formData).subscribe( (obj) => {
+      // console.log(obj);
+    });
+  }
+  private getFileNames(files: File[]): string {
+     const names = files.map(file => file.name);
+     console.log(names);
+    return names ? names.join(', ') : 'No files currently added.';
   }
 
 }

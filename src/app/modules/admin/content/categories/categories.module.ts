@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DataTableModule} from 'angular2-datatable';
 import {HttpModule} from '@angular/http';
 import {SelectModule} from 'ng-select';
+import { Ng2FileInputModule } from 'ng2-file-input';
 import {SelectOptionService} from '../../../admin/shared/element/select-option.service';
 import {TagInputModule} from 'ngx-chips';
 import {RouterModule, Routes} from '@angular/router';
@@ -41,6 +42,7 @@ const CategoryRoutes: Routes = [{
     DataTableModule,
     RouterModule.forChild(CategoryRoutes),
     SharedModule,
+    Ng2FileInputModule.forRoot(),
     QuillEditorModule,
     FileUploadModule
   ],
